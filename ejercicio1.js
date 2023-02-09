@@ -1,9 +1,19 @@
 import {LitElement, html} from 'lit';
+
 export class MyElement extends LitElement {
-    render() {
-        return html`
-          <p>Hello world! From my-element.</p>
-        `;
-      }
+  static properties = {
+  message: {},
+};
+
+constructor() {
+  super();
+  this.message = 'Hello again.';
+}
+
+  render() {
+    return html`
+      ${this.message}
+    `;
+  }
 }
 customElements.define('my-element', MyElement);
