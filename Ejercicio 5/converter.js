@@ -1,9 +1,11 @@
-export const dateConverter = {
-    toAttribute: (date) => {
-      return date.toString();
-    },
-    fromAttribute: (value) => {
-      return new Date(value);
-    },
+export const dateConverter = (locale) => {
+    return {
+      toAttribute: (date) => {
+        return date.toLocaleDateString(locale);
+      },
+      fromAttribute: (value) => {
+        return new Date(value);
+      },
+    };
   };
   
