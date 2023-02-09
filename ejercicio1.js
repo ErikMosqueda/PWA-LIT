@@ -1,19 +1,25 @@
 import {LitElement, html} from 'lit';
 
-export class MyElement extends LitElement {
+export class NameTag extends LitElement {
   static properties = {
-  message: {},
-};
+    name: {},
+  };
 
-constructor() {
-  super();
-  this.message = 'Hello again.';
-}
+  constructor() {
+    super();
+    this.name = 'Your name here';
+  }
 
   render() {
+    // TODO: Add declarative event listener to input.
     return html`
-      ${this.message}
+      <p>Hello, ${this.name}</p>
+      <input @input=${this.changeName} placeholder="Enter your name">
     `;
   }
+changeName(event) {
+  const input = event.target;
+  this.name = input.value;
 }
-customElements.define('my-element', MyElement);
+}
+customElements.define('name-tag', NameTag);
