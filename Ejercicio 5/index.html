@@ -1,14 +1,34 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <script type="module" src="./date-display.js"></script>
-    <!-- playground-hide --><script type="module" src="./_check-code.js"></script><!-- playground-hide-end -->
-  </head>
-  <body>
-    <date-display></date-display>
-    <script>
-      const dateDisplay = document.querySelector('date-display');
-      dateDisplay.date = new Date('05/05/22');
-    </script>
-  </body>
-</html>
+import {LitElement, html} from 'lit';
+
+export class DateDisplay extends LitElement {
+  static properties = {
+    date: {attribute: false},
+    dateStr: {type: String, attribute: 'date-str'},
+  };
+
+  constructor() {
+    super();
+    this.date = new Date();
+    this.dateStr = '';
+  }
+
+  willUpdate(changed) {
+    if (changed.has('dateStr') && this.dateStr) {
+      this.date = new Date(this.dateStr);
+    }
+  }
+
+  render() {
+    const locale = 'en-US';
+    const options = {
+      weekday: 'long',
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+    };
+    return html`
+      <p>The given date is: ${this.date.toLocaleDateString(locale, options)}</p>
+    `;
+  }
+}
+customElements.define('date-display', DateDisplay);
